@@ -128,8 +128,14 @@ class ContinuedFraction
     n = number
     limit.times do |i|
       qs[i] = n.to_i
-      n = 1.0/(n-qs[i])
+      divisor = n-qs[i]
+      if divisor == 0.0
+        break
+      end
+      n = 1.0/divisor
     end
+    qs = qs.compact
+    self.limit = qs.length
     qs
   end
 
